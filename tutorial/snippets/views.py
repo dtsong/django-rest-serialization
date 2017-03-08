@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from snippets.models import Snippet
-from snippets.serializers import SnippetSerializer
+from .models import Snippet
+from .serializers import SnippetSerializer
 
 class JSONResponse(HttpResponse):
     """
@@ -31,6 +31,7 @@ class JSONResponse(HttpResponse):
                 serializer.save()
                 return JSONResponse(serializer.data, status=201)
             return JSONResponse(serializer.errors, status=400)
+
 
     @csrf_exempt
     def snippet_detail(request, pk):
